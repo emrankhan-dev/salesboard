@@ -36,6 +36,8 @@ const provider = new GoogleAuthProvider()
 
 const loggedOutView = document.getElementById("logged-out-view")
 const loggedInView = document.getElementById("logged-in-view")
+const userName = document.getElementById('user-name')
+const userProfilePictureEl = document.getElementById("user-profile-picture")
 const continueWithGoogle = document.getElementById('continue-with-google')
 const logOut = document.getElementById("log-out")
 
@@ -44,11 +46,33 @@ onAuthStateChanged(auth, function (user) {
     if (user) {
         loggedInView.style.display = "block"
         loggedOutView.style.display = "none"
+        showProfilePicture(userProfilePictureEl, user)
+        showUserName(userName, user)
     } else {
-        loggedInView.style.display = "none"
-        loggedOutView.style.display = "block"
+        loggedInView.style.display = "block"
+        loggedOutView.style.display = "none"
     }
 })
+
+function showUserName(userElement, user) {
+    const displayName = user.displayName
+    if(displayName) {
+        const userFirstName = displayName.split(" ")[0]
+        userElement.textContent = `Hi, ${userFirstName}`
+    } else {
+        userElement.textContent = `New User`
+    }
+}
+
+function showProfilePicture(imgElement, user) {
+    const photoURL = user.photoURL
+    
+    if (photoURL) {
+        imgElement.src = photoURL
+    } else {
+        imgElement.src = "./images/default-profile-picture.jpeg"
+    }
+}
 
 continueWithGoogle.addEventListener('click', function() {
     signInWithPopup(auth, provider)
@@ -71,7 +95,7 @@ const productBbtn = document.getElementById('product-b')
 const liveScoreEl = document.getElementById('live-score')
 const liveAchievemnetsEl = document.getElementById('live-achievements')
 const totalRevenueEl = document.getElementById('total-revenue')
-const totalCommisionEl = document.getElementById('total-commision')
+const totalCommisionEl = document.getElementById('total-commission')
 
 let totalRevenue = 0
 let totalCommision = 0
