@@ -1,0 +1,14 @@
+{
+  "name": "Scrim-s037orh",
+  "description": "https://scrimba.com/s037orh/s0tk773urp/head",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vite": "latest"
+  },
+  "devDependencies": {}
+}
